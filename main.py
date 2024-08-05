@@ -6,9 +6,6 @@ import pgzrun
 
 os.environ['SDL_VIDEO_WINDOW_POS'] = 'center'
 
-WIDTH = 2289  # Scale to 50x50 pixels
-HEIGHT = 1148
-
 current_frame = 0
 frame_count = 0
 frame_interval = 15
@@ -25,9 +22,25 @@ bird_down = pygame.image.load('images/flappy_bird_down.png')
 scaled_bird_down = pygame.transform.scale(bird_down, (125, 125))
 pygame.image.save(scaled_bird_down, 'images/flappy_bird_down.png')
 
+
+def set_fullscreen():
+    pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
+
+def get_WIDTH_and_HEIGHT():
+    info = pygame.display.Info()
+
+    global WIDTH, HEIGHT
+    WIDTH, HEIGHT = info.current_w, info.current_h
+
+    print(f"{WIDTH} {HEIGHT}")
+
+
+set_fullscreen()
+get_WIDTH_and_HEIGHT()
+
 bird_up = Actor("flappy_bird_up")
 bird_up.pos = WIDTH / 2 - 700, HEIGHT / 2 - 300
-
 bird_down = Actor("flappy_bird_down")
 bird_down.pos = WIDTH / 2 - 700, HEIGHT / 2 - 300
 
